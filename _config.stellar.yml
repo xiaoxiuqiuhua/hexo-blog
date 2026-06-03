@@ -1,0 +1,66 @@
+# Stellar Theme Configuration
+# Docs: https://xaoxuu.com/wiki/stellar
+
+# 站点信息
+site_name: 我的博客
+site_icon: fa-solid fa-blog
+
+# 导航菜单
+menu:
+  首页: /
+  归档: /archives
+  关于: /about
+
+# 侧边栏
+sidebar:
+  left:
+    - type: profile
+      # 个人资料卡
+      avatar: /images/avatar.png
+      author: 小华
+      description: 记录生活与思考
+      # 社交链接
+      social:
+        - icon: fa-solid fa-envelope
+          url: mailto:your-email@example.com
+    - type: recent_posts
+      title: 最新文章
+      limit: 5
+    - type: categories
+      title: 分类
+    - type: tags
+      title: 标签
+
+# 文章列表样式
+# 可选: timeline, blog, grid
+layout:
+  home_style: timeline
+  post_style: blog
+
+# 暗色模式
+darkmode:
+  enable: true
+  # auto: 跟随系统
+  # light: 默认亮色
+  # dark: 默认暗色
+  default: auto
+
+# 评论系统（暂不配置，后续添加）
+comments:
+  service: # waline, twikoo, giscus 等
+
+# 搜索功能
+search:
+  service: local
+  # 本地搜索，无需额外配置
+
+# 页脚
+footer:
+  # 版权信息
+  copyright: true
+  # 运行时间
+  since: 2024
+
+# 代码块
+code_blocks:
+  theme: # 代码高亮主题
