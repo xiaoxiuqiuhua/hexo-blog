@@ -29,7 +29,7 @@ defaults:
   # Site logo
   logo: 
   # Site avatar
-  avatar: /images/redefine-avatar.svg
+  avatar: /images/avatar_terminal.webp
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -80,7 +80,7 @@ global:
   # Website counter
   website_counter:
     url: https://cn.vercount.one/js # counter API URL (no need to change)
-    enable: false # enable website counter or not
+    enable: true # enable website counter or not
     site_pv: true # site page view
     site_uv: true # site unique visitor
     post_pv: true # post page view
@@ -435,15 +435,34 @@ footer:
 # Docs: https://redefine-docs.ohevan.com/inject
 inject:
   # Whether to enable inject
-  enable: false
+  enable: true
   # Inject custom head html code
-  head: 
+  head:
     -
     -
   # Inject custom footer html code
   footer:
-    -
-    -
+    - |
+      <script>
+      (function() {
+        var UV_OFFSET = 1000;
+        var PV_OFFSET = 2000;
+        function patch() {
+          var uv = document.getElementById('busuanzi_value_site_uv');
+          var pv = document.getElementById('busuanzi_value_site_pv');
+          if (uv && uv.innerText) {
+            var n = parseInt(uv.innerText.replace(/,/g, ''));
+            if (!isNaN(n)) uv.innerText = (n + UV_OFFSET).toLocaleString();
+          }
+          if (pv && pv.innerText) {
+            var n = parseInt(pv.innerText.replace(/,/g, ''));
+            if (!isNaN(n)) pv.innerText = (n + PV_OFFSET).toLocaleString();
+          }
+        }
+        patch();
+        setInterval(patch, 2000);
+      })();
+      </script>
 # INJECT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
