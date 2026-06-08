@@ -42,11 +42,13 @@ jobs:
           echo "--- md5 (remote, before) ---"
           coscmd info /images/wallhaven-wqery6-light.webp 2>&1 | head -10
           coscmd info /images/wallhaven-wqery6-dark.webp 2>&1 | head -10
-          echo "--- main upload ---"
-          coscmd upload -rfs --delete ./ /
-          echo "--- explicit home banner upload ---"
-          coscmd upload -fs ./images/wallhaven-wqery6-light.webp /images/wallhaven-wqery6-light.webp
-          coscmd upload -fs ./images/wallhaven-wqery6-dark.webp /images/wallhaven-wqery6-dark.webp
+          # 注意: 不要加 -s! -s 是 sync 模式,会跳过 md5 相同的文件。
+          # 我们的 home banner 图 md5 可能恰好和 COS 上一致,会被 -s 跳过。
+          echo "--- main upload (rf --delete, no -s) ---"
+          coscmd upload -rf --delete ./ /
+          echo "--- explicit home banner upload (force, no -s) ---"
+          coscmd upload -f ./images/wallhaven-wqery6-light.webp /images/wallhaven-wqery6-light.webp
+          coscmd upload -f ./images/wallhaven-wqery6-dark.webp /images/wallhaven-wqery6-dark.webp
           echo "--- md5 (remote, after) ---"
           coscmd info /images/wallhaven-wqery6-light.webp 2>&1 | head -10
           coscmd info /images/wallhaven-wqery6-dark.webp 2>&1 | head -10
