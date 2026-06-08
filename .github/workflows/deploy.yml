@@ -36,3 +36,8 @@ jobs:
         run: |
           cd ./public
           coscmd upload -rfs --delete ./ /
+          # 兜底: 显式再传一次 home banner 两张图。
+          # 之前发现 -r 递归上传在某些情况下会漏传特定文件(Last-Modified 不变),
+          # 这里用单文件 upload 强制覆盖,确保 CDN/源站都能拿到最新版。
+          coscmd upload -fs ./images/wallhaven-wqery6-light.webp /images/wallhaven-wqery6-light.webp
+          coscmd upload -fs ./images/wallhaven-wqery6-dark.webp /images/wallhaven-wqery6-dark.webp
